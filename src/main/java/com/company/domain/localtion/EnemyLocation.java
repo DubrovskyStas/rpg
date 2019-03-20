@@ -1,7 +1,7 @@
-package domain.localtion;
+package com.company.domain.localtion;
 
-import domain.enemy.Enemy;
-import enums.EnemyLocationDescription;
+import com.company.domain.enemy.Enemy;
+import com.company.enums.EnemyLocationDescription;
 import lombok.Data;
 
 @Data

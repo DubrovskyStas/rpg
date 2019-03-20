@@ -1,8 +1,7 @@
-package domain.localtion;
+package com.company.domain.localtion;
 
-import domain.enemy.BigBoss;
-import domain.enemy.Enemy;
-import lombok.Data;
+import com.company.domain.enemy.BigBoss;
+import com.company.domain.enemy.Enemy;
 import lombok.Getter;
 
 @Getter

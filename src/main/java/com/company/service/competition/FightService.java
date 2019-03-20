@@ -1,8 +1,8 @@
-package service.competition;
+package com.company.service.competition;
 
-import domain.Bounty;
-import domain.Person;
-import domain.enemy.Enemy;
+import com.company.domain.Bounty;
+import com.company.domain.Person;
+import com.company.domain.enemy.Enemy;
 
 import java.util.Optional;
 

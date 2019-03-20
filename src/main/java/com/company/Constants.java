@@ -1,6 +1,6 @@
-package domain;
+package com.company;
 
-import enums.HomeOption;
+import com.company.enums.HomeOption;
 
 import java.util.Arrays;
 import java.util.Scanner;

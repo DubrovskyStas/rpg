@@ -1,6 +1,6 @@
-package domain.enemy;
+package com.company.domain.enemy;
 
-import enums.EnemyDescription;
+import com.company.enums.EnemyDescription;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

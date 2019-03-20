@@ -1,4 +1,4 @@
-package domain.enemy;
+package com.company.domain.enemy;
 
 public class BigBoss extends Enemy {
 

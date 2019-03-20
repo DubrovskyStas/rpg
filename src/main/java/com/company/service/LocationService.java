@@ -1,43 +1,56 @@
-package service;
+package com.company.service;
 
-import domain.Bounty;
-import domain.Constants;
-import domain.Person;
-import domain.enemy.Enemy;
-import domain.localtion.EnemyLocation;
-import enums.EnemyDescription;
-import enums.EnemyLocationDescription;
-import enums.HomeOption;
-import enums.UserAction;
-import service.competition.CompetiotionServiceDispatcher;
+import com.company.Constants;
+import com.company.domain.Bounty;
+import com.company.domain.Person;
+import com.company.domain.enemy.Enemy;
+import com.company.domain.localtion.EnemyLocation;
+import com.company.enums.EnemyDescription;
+import com.company.enums.EnemyLocationDescription;
+import com.company.enums.HomeOption;
+import com.company.enums.UserAction;
+import com.company.service.competition.CompetiotionServiceDispatcher;
 
+import java.io.IOException;
 import java.util.Optional;
 
 import static java.lang.Math.*;
 
 public class LocationService {
     private IoService ioService = new IoService();
+    private PersonService personService = new PersonService();
     private CompetiotionServiceDispatcher competiotionServiceDispatcher = new CompetiotionServiceDispatcher();
 
-    public void home(Person person) throws InterruptedException {
+    public void home(Person person) throws InterruptedException, IOException {
         HomeOption homeOption = HomeOption.ENEMY;
-        while (homeOption == HomeOption.ENEMY) {
+        while (homeOption != HomeOption.BOSS) {
             System.out.println(Constants.HOME_OUTPUT);
             System.out.println(person);
+
             homeOption = ioService.selectValue(HomeOption.values());
-            if (homeOption == HomeOption.ENEMY) {
-                enemyLocation(person);
+            switch (homeOption) {
+                case ENEMY:
+                    enemyLocation(person);
+                    break;
+                case BOSS:
+                case SAVE:
+                    personService.createBackup(person);
+                    break;
+                case EXIT:
+                    System.out.println("Good bye! See you later!");
+                    System.exit(0);
             }
         }
-
     }
 
     private void enemyLocation(Person person) throws InterruptedException {
         EnemyLocation enemyLocation = generateLocation(person);
-        System.out.println("Now you are in the " + enemyLocation.getEnemyLocationDescription().name());
+        System.out.printf("Now you are in the %s%n", enemyLocation.getEnemyLocationDescription().name());
         System.out.println(enemyLocation.getEnemyLocationDescription().getDescription());
-        System.out.println("You can see " + enemyLocation.getEnemy().getEnemyDescription().name());
+        System.out.printf("Now you are seeing a %s%n", enemyLocation.getEnemy().getEnemyDescription().name());
         System.out.println(enemyLocation.getEnemy().getEnemyDescription().getDescription());
+        System.out.println(enemyLocation.getEnemy());
+        System.out.println();
         for (UserAction userAction: UserAction.values()) {
             System.out.println(userAction.getDescription());
         }
@@ -45,7 +58,12 @@ public class LocationService {
         UserAction userAction = ioService.selectValue(UserAction.values());
 
         Optional<Bounty> bountyOptional = competiotionServiceDispatcher.getBounty(userAction, person, enemyLocation.getEnemy());
-        bountyOptional.ifPresent(person::addExperiense);
+        if (bountyOptional.isPresent()) {
+            System.out.println("You won and got some bounty. Congratulations!");
+            person.addExperience(bountyOptional.get());
+        } else {
+            System.out.println("Unfortunately you couldn't defeat the enemy. Next time you can to win.");
+        }
     }
 
     private EnemyLocation generateLocation(Person person) {
