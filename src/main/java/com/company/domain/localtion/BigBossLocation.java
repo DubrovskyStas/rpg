@@ -7,5 +7,5 @@ import lombok.Getter;
 @Getter
 public class BigBossLocation {
     private final Enemy bigBoss = new BigBoss();
-    private final String description = "This is last location that you see. Now you can die or win. Good luck!";
+    private final String description = "If you win Big Boss you will finish game! Good luck!";
 }

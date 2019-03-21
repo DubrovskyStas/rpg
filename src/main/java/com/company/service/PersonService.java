@@ -73,8 +73,8 @@ public class PersonService {
     }
 
     public Person restoreFromBackup() throws IOException, ClassNotFoundException {
-        try (ObjectInputStream inputStream = new ObjectInputStream(
-                new FileInputStream(getBackupName()))) {
+        try (FileInputStream fileInputStream = new FileInputStream(getBackupName());
+             ObjectInputStream inputStream = new ObjectInputStream(fileInputStream)) {
             return (Person) inputStream.readObject();
         }
     }

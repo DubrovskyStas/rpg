@@ -8,7 +8,7 @@ import com.company.enums.UserAction;
 
 import java.util.Optional;
 
-public class CompetiotionServiceDispatcher {
+public class CompetitionServiceDispatcher {
     private CompetitionService fightService = new FightService();
     private CompetitionService quietKillService = new QuietKillService();
     private CompetitionService theftService = new TheftService();

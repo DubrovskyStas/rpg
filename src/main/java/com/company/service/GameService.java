@@ -26,7 +26,6 @@ public class GameService {
                     return personService.initPerson();
             }
         }
-
         return personService.initPerson();
     }
 
