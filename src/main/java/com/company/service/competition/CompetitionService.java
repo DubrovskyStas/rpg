@@ -11,6 +11,6 @@ public interface CompetitionService {
     Optional<Bounty> compete(Person person, Enemy enemy);
 
     default int calcBountyValue(int value) {
-        return Math.toIntExact(Math.round(value* Math.random()));
+        return (int) Math.round(value * Math.random());
     }
 }
