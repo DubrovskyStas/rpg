@@ -91,7 +91,7 @@ public class LocationService {
             System.out.println("You won and got some bounty. Congratulations!");
             person.addExperience(bountyOptional.get());
         } else {
-            System.out.println("Unfortunately you couldn't defeat the enemy. Next time you can to win.");
+            System.out.println("Unfortunately you couldn't defeat the enemy. Next time you can win.");
         }
     }
 
